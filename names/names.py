@@ -28,11 +28,11 @@ f.close()
 # structures?
 
 # takes less than 0.005 of a second
-words1 = set(names_1) # O(len(names_1))
-words2 = set(names_2) # O(len(names_1))
+names_1 = set(names_1) # O(len(names_1))
+names_2 = set(names_2) # O(len(names_1))
 
 # O(len(names_1) + len(names_2)) could go up to O(n) worst case
-duplicates = words1.intersection(words2) 
+duplicates = names_1.intersection(names_2) 
 
 
 end_time = time.time()
