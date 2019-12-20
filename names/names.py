@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BinarySearchTree
 
 start_time = time.time()
 
@@ -18,9 +19,24 @@ f.close()
 #         if name_1 == name_2:
 #             duplicates.append(name_1)
 
+
 # takes under 1.3 seconds
-# O(n)
+# O(n**2)
 # duplicates = [name for name in names_1 if name in names_2]
+
+
+# algorithm for binary searching a name from names_1 in binary tree sorted names_2
+# O(n log(n)) ~ 0.115 seconds
+# duplicates = []
+
+# bst = BinarySearchTree(names_2[0])
+# for name in names_2[1:]:
+#   bst.insert(name)
+
+# for name_1 in names_1:
+#   if bst.contains(name_1):
+#     duplicates.append(name_1)
+
 
 # ---------- Stretch Goal -----------
 # Python has built-in tools that allow for a very efficient approach to this problem
