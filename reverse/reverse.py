@@ -46,5 +46,14 @@ class LinkedList:
     return False
 
   def reverse_list(self, node, prev):
-    # You must use recursion for this solution
-    pass
+    # reversing an SLL recursively
+    # while current node is not none
+    if node is not None:
+      # update the pointers as follows, and then recursively call reverse
+      next_node = node.next_node
+      node.next_node = prev
+      prev = node
+      node = next_node
+      self.head = prev
+      self.reverse_list(node, prev)
+    
