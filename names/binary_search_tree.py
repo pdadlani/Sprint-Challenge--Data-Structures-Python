@@ -1,39 +1,49 @@
 class BinarySearchTree:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+  def __init__(self, value):
+    self.value = value
+    self.left = None
+    self.right = None
 
-    # Insert the given value into the tree
-    def insert(self, value):
-        # If inserting, we must already have a tree/root
-        if self.value is None:
-            self.value = value
-            return self.value
-        # If value is less than self.value, go left, make a new tree/node, if empty. Otherwise, keep going (recursion)
-        elif value < self.value:
-            if self.left:
-                return self.left.insert(value)
-            else:
-                self.left = BinarySearchTree(value)
-        # If greater than or equal to self.value, go right, make a new tree/node, if empty. Otherwise, keep going (recursion)
-        elif value >= self.value:
-            if self.right:
-                return self.right.insert(value)
-            else:
-                self.right = BinarySearchTree(value)
+  # Insert the given value into the tree
+  def insert(self, value):
+    # check: if the tree is empty
+    if self.value is None:
+      # then put node at the root
+      self.value = BinarySearchTree(value)
+      return
 
-    # Return True if the tree contains the value
-    # False if it does not
-    def contains(self, target):
-        # if target == self.value, return it
-        if target == self.value:
-            return True
-        # otherwise, go left or right based on smaller or bigger
-        elif target > self.value and self.right:
-            # move right
-            return self.right.contains(target)
-        elif target < self.value and self.left:
-            # move left
-            return self.left.contains(target)
-        return False
+    # otherwise
+    # if value of new node < value of root 
+    if value < self.value:
+      # call insert on the left bst, if there is one; 
+      # otherwise instantiate a new BST with this value
+      if self.left is None:
+        self.left = BinarySearchTree(value)
+      else:
+        self.left.insert(value)
+    # else if value of new node is >= value of root
+    # there is no need to actually check this, but it's nice
+    elif value >= self.value:
+      # call insert on the right bst, if there is one
+      # otherwise, instantiate a new BST with this value
+      if self.right is None:
+        self.right = BinarySearchTree(value)
+      else:
+        self.right.insert(value)
+
+  # Return True if the tree contains the value
+  # False if it does not
+  def contains(self, target):
+    # if node.value == target:
+    if self.value == target:
+      # return true
+      return True
+    # otherwise, if target is < node.value AND there is a left:
+    elif target < self.value and self.left:
+      # find the target on left bst
+      return self.left.contains(target)
+    # else if target is >= node.value AND there is a right:
+    elif target > self.value and self.right:
+      # find the target on the right bst
+      return self.right.contains(target)
+    return False
